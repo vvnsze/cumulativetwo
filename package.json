@@ -8,6 +8,7 @@
   },
   "author": "",
   "license": "ISC",
+  "start": "node server/server.js",
   "dependencies": {
     "angular": "^1.5.8",
     "body-parser": "^1.15.2",
