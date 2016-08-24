@@ -1,50 +1,62 @@
-var express = require('express');
-var app = express();
-var cors = require('cors');
-var bodyParser = require("body-parser");
-var request = require('request');
-var rp = require('request-promise');
-// var angular = require('angular');
+var app = angular.module('FarmLocations', []);
 
-//url we use to query search https://data.ct.gov/resource/y6p2-px98.json?
-//https://data.ct.gov/resource/y6p2-px98.json?
+app.controller('foodList',function($scope, foodSearch){
+  $scope.toggle = foodSearch.toggle;
+  $scope.result ='';
+  $scope.receivedFood = foodSearch.receivedFood;
 
-app.use(cors());
-app.use(express.static('./client'));
+  $scope.addFoodItem = function(item){
+    if(item){
+      $scope.search(item);
+    } else{
+      $scope.result= 'Please put in a food Item';
+    }
+  }
 
-app.use(bodyParser.json());
+  $scope.search = function(item){
+    foodSearch.submitSearch(item);
+    console.log($scope.receivedFood);
+  }
 
-
-// app.get('/search', function(req, res){
-//   var url = "https://data.ct.gov/resource/y6p2-px98.json?item=guava"; //not just guava, need to retrieve an object with params from client side
-//   console.log('+++line 27 inside /search');
-//   rp(url).then(function(data){
-//     // console.log("line29 data for /search", data[0]);
-//     // console.log("+++line 30 type of data", typeof data);
-//     res.send(JSON.parse(data));
-//   }).catch(function(error){
-//     console.error('+++line29: There was an issue in app.get/search')
-//   });
-// });
-
-
-app.get('/fooditem', function(req, res){
-  var foodItem = "category=" + req.query.item;
-
-  var url = "https://data.ct.gov/resource/y6p2-px98.json?" + foodItem;
-  rp(url).then(function(data){
-    // console.log("line29 data for /search", data);
-    // console.log("+++line 30 type of data", typeof data);
-    res.send(JSON.parse(data));
-  }).catch(function(error){
-    console.error('+++line29: There was an issue in app.get/search')
-  });
 });
 
 
+app.factory('foodSearch',function($http){
 
-app.set('port', process.env.PORT || 3000);
+  // $http({
+  //   method: 'GET',
+  //   url: '/search'
+  // }).then(function(response){
+  //   console.log('response received properly line 29' , response);
+  // }).catch(function(error){
+  //   console.error('+++line31 app.js foodsearch get not working');
+  // });
+  var toggle = false;
+  var receivedFood =[]; //this is now an object!
+  var submitSearch = function(item){
+    console.log('line 37 received ' + item);
+    $http({
+      method:'GET',
+      url:'/fooditem',
+      params: {item:item}
+    }).then(function(response){
+      toggle = true;
+      for (var i = 0; i < response.data.length; i++){
+        receivedFood.push(response.data[i]);
+        if(receivedFood.length > 11){
+          return;
+        }
+      }
+    }).catch(function(error){
+      console.log(error);
+    })
 
-app.listen(app.get('port') , function(){
-  console.log('+++line 13 port is listening');
+  }
+
+  return{
+    submitSearch: submitSearch,
+    receivedFood: receivedFood,
+    toggle: toggle
+  };
+
 });

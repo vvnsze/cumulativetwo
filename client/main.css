@@ -1,0 +1,25 @@
+.container{
+  padding-top: 3%;
+  font-family: 'Baloo Paaji', arial;
+}
+
+.jumbotron {
+  background-image: url("https://blogs.socsd.org/woslmc/files/2015/01/bg3-1q7p5na.jpg");
+  background-size: cover;
+  height: 500px;
+  width: auto;
+}
+
+.searchField{
+  background-color: transparent;
+  outline: none;
+  border-color: lightgreen;
+}
+
+.row{
+  text-align: center;
+}
+
+.col1 {
+  background-color:
+}

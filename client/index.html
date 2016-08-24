@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html ng-app ='FarmLocations'>
+  <head>
+    <meta charset="utf-8">
+    <title>Cumulative</title>
+    <link rel="stylesheet" type="text/css" href="main.css">
+  </head>
+  <body>
+      <!-- for the cdn scripts -->
+  <link href="https://fonts.googleapis.com/css?family=Baloo+Paaji" rel="stylesheet">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+  <script src="https://code.jquery.com/jquery-3.1.0.min.js"   integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s="   crossorigin="anonymous"></script>
+
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+  <script src="/node_modules/angular/angular.js"></script>
+  <script src="app.js"></script>
+
+  <div class = 'container'>
+    <div ng-controller="foodList">
+      <!-- THIS IS THE JUMBOTRON -->
+      <div class="jumbotron">
+        <h1>Find A Farm</h1>
+          <p>Farm searching at its best</p>
+          Food Category:<br>
+          <input class="searchField" type="text" ng-model = 'newFood'>
+          <button class="btn btn-success" ng-click=addFoodItem(newFood)>Search Farms!</button>
+      </div>
+      <div class = "row">
+        <div class = "col-md-12">
+          <h1> Search a food category and the results show below!</h1>
+        </div>
+      </div>
+
+      <div class="row">
+        <div  class= "col1" class="col-md-4">
+          <h3>Food Item and Category</h3>
+          <p ng-repeat='food in receivedFood'>Category: {{food.category}},  Food Name: {{food.item}}</p>
+        </div>
+
+        <div class= "col2" class="col-md-4">
+          <h3> Business Name</h3>
+          <p ng-repeat='food in receivedFood'>{{food.business}}<p>
+        </div>
+
+        <div class= "col3" class="col-md-4">
+          <h3>Address</h3>
+          <p ng-repeat='food in receivedFood'>
+          {{food.location_1_location}},{{food.location_1_city}},{{food.location_1_state}} {{food.zipcode}}
+          </p>
+        </div>
+    </div>
+</div>
+
+
+        <!-- <ul>
+          <li ng-repeat='food in receivedFood'> , Business Name:{{food.business}}, Address: {{food.location_1_location}},{{food.location_1_city}},{{food.location_1_state}},{{food.zipcode}}</li>
+        </ul> -->
+    </div>
+  </div>
+
+
+
+  </body>
+</html>
+
+
+<!-- <table style="width:100%">
+<thead>
+<tr>
+<th>Food Name</th>
+<! <th>Category</th>
+<th>BusinessName</th>
+<th>Street</th>
+<th>City</th>
+<th>State</th>
+<th>Zipcode</th> -->
+<!-- </tr>
+</thead>
+<tbody>
+<tr ng-show= "toggle" ng-repeat='food in receivedFood'>
+<td>{{food.item}}</td> -->
+<!-- <td>{{food.category}}</td>
+<td>{{food.business}}</td>
+<td>{{food.location_1_location}}</td>
+<td>{{food.location_1_city}}</td>
+<td>{{food.location_1_state}}</td>
+<td>{{food.zipcode}}</td> -->
+<!-- </tr>
+</tbody>
+
+</table> -->
